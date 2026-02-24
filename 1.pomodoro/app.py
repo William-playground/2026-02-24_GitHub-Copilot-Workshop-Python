@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-# Default settings stored in memory
+# Default settings stored in memory (resets on app restart; single-process only)
 settings = {
     "work_duration": 25,
     "break_duration": 5,

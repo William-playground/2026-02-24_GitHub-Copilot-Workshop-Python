@@ -160,6 +160,8 @@ class TestUpdateSettings:
             data="not json",
             content_type="text/plain",
         )
+        # Flask returns 400 (get_json returns None, handled by our code)
+        # or 415 in some configurations (content-type rejection)
         assert response.status_code in (400, 415)
 
     def test_settings_persist_across_requests(self, client):
