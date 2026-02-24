@@ -4,6 +4,12 @@ from datetime import datetime, timezone, timedelta
 from models import db, PomodoroSession, UserProfile, Badge
 
 
+BASE_XP = 10
+STANDARD_POMODORO_MINUTES = 25
+XP_PER_LEVEL = 100
+DAILY_GOAL_SESSIONS = 8
+MONTHLY_DAYS = 30
+
 # Badge definitions: (name, description, check_function)
 BADGE_DEFINITIONS = [
     {
@@ -71,18 +77,18 @@ def _get_profile():
 
 
 def _calculate_xp(duration_minutes):
-    """XP per pomodoro = 10 * (duration_minutes / 25), rounded to int."""
-    return round(10 * (duration_minutes / 25))
+    """XP per pomodoro = BASE_XP * (duration_minutes / STANDARD_POMODORO_MINUTES), rounded to int."""
+    return round(BASE_XP * (duration_minutes / STANDARD_POMODORO_MINUTES))
 
 
 def _calculate_level(xp):
-    """Level = 1 + (total_xp // 100)."""
-    return 1 + (xp // 100)
+    """Level = 1 + (total_xp // XP_PER_LEVEL)."""
+    return 1 + (xp // XP_PER_LEVEL)
 
 
 def _xp_to_next_level(xp):
-    """XP needed to reach next level = 100 - (xp % 100)."""
-    return 100 - (xp % 100)
+    """XP needed to reach next level = XP_PER_LEVEL - (xp % XP_PER_LEVEL)."""
+    return XP_PER_LEVEL - (xp % XP_PER_LEVEL)
 
 
 def _get_streak_info():
@@ -328,8 +334,8 @@ def register_routes(app):
                 }
             )
 
-        # Monthly stats: last 30 days
-        month_start = now - timedelta(days=30)
+        # Monthly stats: last MONTHLY_DAYS days
+        month_start = now - timedelta(days=MONTHLY_DAYS)
         monthly_sessions = PomodoroSession.query.filter(
             PomodoroSession.completed_at >= month_start
         ).all()
@@ -338,8 +344,8 @@ def register_routes(app):
         if total_monthly > 0:
             avg_duration = sum(s.duration_minutes for s in monthly_sessions) / total_monthly
 
-        # Completion rate: based on 8 pomodoros/day goal over 30 days
-        goal_total = 8 * 30
+        # Completion rate: based on DAILY_GOAL_SESSIONS pomodoros/day goal over MONTHLY_DAYS days
+        goal_total = DAILY_GOAL_SESSIONS * MONTHLY_DAYS
         completion_rate = round((total_monthly / goal_total) * 100, 1) if goal_total > 0 else 0.0
 
         return jsonify(

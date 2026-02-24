@@ -503,7 +503,7 @@
                 const days = ['日', '月', '火', '水', '木', '金', '土'];
 
                 data.weekly.forEach(d => {
-                    const date = new Date(d.date + 'T00:00:00');
+                    const date = new Date(d.date + 'T00:00:00Z');
                     const dayName = days[date.getDay()];
                     const heightPct = (d.sessions / maxSessions) * 100;
 

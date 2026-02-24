@@ -99,7 +99,7 @@ class TestBadges:
         assert "初めてのポモドーロ" in data["new_badges"]
 
     def test_five_completions_badge(self, client, db):
-        for i in range(5):
+        for _ in range(5):
             resp = client.post(
                 "/api/sessions",
                 data=json.dumps({}),
@@ -109,7 +109,7 @@ class TestBadges:
         assert "5回達成" in data["new_badges"]
 
     def test_ten_completions_badge(self, client, db):
-        for i in range(10):
+        for _ in range(10):
             resp = client.post(
                 "/api/sessions",
                 data=json.dumps({}),
