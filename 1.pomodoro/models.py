@@ -8,7 +8,7 @@ class Session(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     started_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    type = db.Column(db.String(10), nullable=False, default="work")  # 'work' | 'break'
+    session_type = db.Column('type', db.String(10), nullable=False, default="work")  # 'work' | 'break'
     duration = db.Column(db.Integer, nullable=False)  # 秒
     completed = db.Column(db.Boolean, nullable=False, default=False)
 
@@ -16,10 +16,10 @@ class Session(db.Model):
         return {
             "id": self.id,
             "started_at": self.started_at.isoformat(),
-            "type": self.type,
+            "type": self.session_type,
             "duration": self.duration,
             "completed": self.completed,
         }
 
     def __repr__(self):
-        return f"<Session id={self.id} type={self.type} completed={self.completed}>"
+        return f"<Session id={self.id} type={self.session_type} completed={self.completed}>"

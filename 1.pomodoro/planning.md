@@ -4,11 +4,11 @@
 
 **目標:** Flask が起動し、トップページが返せる状態にする
 
-- [ ] `config.py` — `Config` / `TestingConfig` クラス
-- [ ] `database.py` — SQLAlchemy インスタンス初期化
-- [ ] `models.py` — `Session` モデル定義
-- [ ] `app.py` — `create_app()` ファクトリ + `GET /` ルート
-- [ ] `templates/index.html` — 最小限の骨格 HTML（スタイルなし）
+- [x] `config.py` — `Config` / `TestingConfig` クラス
+- [x] `database.py` — SQLAlchemy インスタンス初期化
+- [x] `models.py` — `Session` モデル定義
+- [x] `app.py` — `create_app()` ファクトリ + `GET /` ルート
+- [x] `templates/index.html` — 最小限の骨格 HTML（スタイルなし）
 
 **完了の確認:** `flask run` でトップページが表示される
 

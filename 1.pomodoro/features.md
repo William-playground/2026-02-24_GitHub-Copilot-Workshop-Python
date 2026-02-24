@@ -12,7 +12,8 @@
 - [ ] `GET /` — メイン画面（index.html）の返却
 - [ ] `POST /api/session` — ポモドーロ完了を DB に記録
 - [ ] `GET /api/stats/today` — 今日の完了数・集中時間の集計・返却
-- [ ] `GET /POST /api/settings` — タイマー設定（作業時間・休憩時間）の取得・保存
+- [ ] `GET /api/settings` — タイマー設定（作業時間・休憩時間）の取得
+- [ ] `POST /api/settings` — タイマー設定（作業時間・休憩時間）の保存
 
 ### ビジネスロジック / DB アクセス
 - [ ] `services/session_service.py` — `complete_session()` / `get_today_stats()` の実装

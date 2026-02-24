@@ -13,6 +13,10 @@ def create_app(config=None):
     else:
         app.config.from_object(config)
 
+    # 本番設定時に SECRET_KEY が必須
+    if not app.config.get("SECRET_KEY"):
+        raise RuntimeError("SECRET_KEY environment variable must be set for production environment.")
+
     # DB 初期化
     init_db(app)
 
@@ -26,4 +30,4 @@ def create_app(config=None):
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(debug=True)
+    app.run()
