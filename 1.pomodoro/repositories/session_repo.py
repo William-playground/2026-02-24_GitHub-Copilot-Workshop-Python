@@ -12,7 +12,6 @@ class SessionRepository:
             type=session_type,
             duration=duration,
             completed=completed,
-            started_at=datetime.now(timezone.utc),
         )
         db.session.add(session)
         db.session.commit()
