@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポモドーロタイマー</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body data-theme="dark">
+    <div class="app-container">
+        <header>
+            <h1>🍅 ポモドーロタイマー</h1>
+            <button id="settings-toggle" class="icon-btn" aria-label="設定を開く">⚙️</button>
+        </header>
+
+        <main>
+            <section class="timer-section">
+                <p id="mode-label" class="mode-label">作業中</p>
+                <div id="timer-display" class="timer-display">25:00</div>
+                <div class="timer-controls">
+                    <button id="btn-start" class="btn btn-primary">スタート</button>
+                    <button id="btn-pause" class="btn btn-secondary" disabled>一時停止</button>
+                    <button id="btn-reset" class="btn btn-danger">リセット</button>
+                </div>
+            </section>
+        </main>
+
+        <aside id="settings-panel" class="settings-panel" aria-hidden="true">
+            <div class="settings-overlay" id="settings-overlay"></div>
+            <div class="settings-content">
+                <div class="settings-header">
+                    <h2>設定</h2>
+                    <button id="settings-close" class="icon-btn" aria-label="設定を閉じる">✕</button>
+                </div>
+
+                <fieldset>
+                    <legend>作業時間（分）</legend>
+                    <div class="radio-group">
+                        <label><input type="radio" name="work_duration" value="15"> 15</label>
+                        <label><input type="radio" name="work_duration" value="25" checked> 25</label>
+                        <label><input type="radio" name="work_duration" value="35"> 35</label>
+                        <label><input type="radio" name="work_duration" value="45"> 45</label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>休憩時間（分）</legend>
+                    <div class="radio-group">
+                        <label><input type="radio" name="break_duration" value="5" checked> 5</label>
+                        <label><input type="radio" name="break_duration" value="10"> 10</label>
+                        <label><input type="radio" name="break_duration" value="15"> 15</label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>テーマ</legend>
+                    <div class="radio-group">
+                        <label><input type="radio" name="theme" value="dark" checked> ダーク</label>
+                        <label><input type="radio" name="theme" value="light"> ライト</label>
+                        <label><input type="radio" name="theme" value="focus"> フォーカス</label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>サウンド設定</legend>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="sound_start" checked> 開始音</label>
+                        <label><input type="checkbox" id="sound_end" checked> 終了音</label>
+                        <label><input type="checkbox" id="sound_tick"> チック音</label>
+                    </div>
+                </fieldset>
+            </div>
+        </aside>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/timer.js') }}"></script>
+</body>
+</html>
