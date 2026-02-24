@@ -34,7 +34,7 @@ class SessionRepository:
         Returns:
             今日のセッションのリスト
         """
-        today_start = datetime.combine(date.today(), datetime.min.time())
+        today_start = datetime.combine(date.today(), datetime.min.time(), tzinfo=timezone.utc)
         return (
             Session.query
             .filter(Session.started_at >= today_start)
