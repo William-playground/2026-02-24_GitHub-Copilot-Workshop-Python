@@ -270,7 +270,6 @@
     let completedCount = 0;
     let totalFocusSec  = 0;
     let timerInterval  = null;
-    let lastFrameTime  = null;
 
     /* DOM refs */
     const progressRing   = document.getElementById('progressRing');
@@ -455,8 +454,7 @@
         const showFull = isRunning && isWorkSession;
 
         particles.forEach(function (p) {
-            const targetAlpha = showFull ? (p.alpha) : (p.alpha * 0.15);
-            const currentAlpha = targetAlpha;   /* instant for simplicity */
+            const alpha = showFull ? p.alpha : (p.alpha * 0.15);
 
             p.x += p.speedX;
             p.y += p.speedY;
@@ -469,7 +467,7 @@
 
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(255, 255, 255, ' + currentAlpha + ')';
+            ctx.fillStyle = 'rgba(255, 255, 255, ' + alpha + ')';
             ctx.fill();
         });
 
