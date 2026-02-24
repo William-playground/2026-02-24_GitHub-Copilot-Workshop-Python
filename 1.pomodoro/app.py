@@ -30,10 +30,10 @@ def api_complete():
     """作業セッション完了を記録する."""
     data = request.get_json(silent=True) or {}
     minutes = data.get("minutes", 25)
-    if not isinstance(minutes, (int, float)) or minutes < 0:
+    if not isinstance(minutes, int) or minutes < 0:
         return jsonify({"error": "invalid minutes"}), 400
     _state["completed"] += 1
-    _state["total_focus_minutes"] += int(minutes)
+    _state["total_focus_minutes"] += minutes
     return jsonify(_state)
 
 

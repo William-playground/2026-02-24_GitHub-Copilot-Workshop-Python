@@ -69,7 +69,7 @@
         completedCount.textContent = String(data.completed);
         focusTime.textContent = formatFocusTime(data.total_focus_minutes);
       })
-      .catch(function () { /* サイレント */ });
+      .catch(function (err) { console.error("status fetch error:", err); });
   }
 
   /** 作業完了を API に送信 */
@@ -80,7 +80,7 @@
       body: JSON.stringify({ minutes: minutes }),
     })
       .then(function () { refreshProgress(); })
-      .catch(function () { /* サイレント */ });
+      .catch(function (err) { console.error("complete post error:", err); });
   }
 
   // --- タイマー制御 -------------------------------------------------------
